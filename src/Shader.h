@@ -11,7 +11,7 @@ class Shader {
 
     void useShader();
 
-    void setUniform1i(std::string uniName, int val);
+    void setUniform1f(std::string uniName, float val);
 
   protected:
     std::string loadFile(std::string path);

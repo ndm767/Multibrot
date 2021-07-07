@@ -63,7 +63,7 @@ Shader::~Shader() { glDeleteProgram(shaderProgram); }
 
 void Shader::useShader() { glUseProgram(shaderProgram); }
 
-void Shader::setUniform1i(std::string uniName, int val) {
+void Shader::setUniform1f(std::string uniName, float val) {
     GLuint loc = glGetUniformLocation(shaderProgram, uniName.c_str());
-    glUniform1i(loc, val);
+    glUniform1f(loc, val);
 }
