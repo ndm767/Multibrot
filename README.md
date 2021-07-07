@@ -12,3 +12,10 @@ Multibrot set renderer written in C++ and OpenGL.
 
 > make  
 > ./multibrot
+
+## Dependencies
+
+- SDL2
+- GLEW
+- OpenGL 3.3
+- Dear ImGui (included)
