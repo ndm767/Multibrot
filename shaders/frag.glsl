@@ -15,6 +15,10 @@ vec2 compExp(vec2 z, float power) {
 
     vec2 ret = vec2(0, 0);
 
+    if (power < 0.0) {
+        return ret;
+    }
+
     ret.x =
         pow((z.x * z.x + z.y * z.y), power / 2.0) * cos(power * atan(z.y, z.x));
     ret.y =

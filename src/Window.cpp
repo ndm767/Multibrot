@@ -56,8 +56,8 @@ void Window::update(float *exp, float *iter) {
     ImGui::Begin("Multibrot");
 
     ImGui::InputFloat("Exponent", exp);
-    if (*exp < 0) {
-        *exp = 0;
+    if (*exp < 0.0f) {
+        *exp = 0.0f;
     }
     ImGui::InputFloat("Iterations", iter);
 
