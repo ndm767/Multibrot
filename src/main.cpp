@@ -10,9 +10,9 @@ int main(int argc, char *argv[]) {
     QuadRenderer quad;
 
     float multibrotExponent = 2.0f;
-    float xPos = 0;
+    float xPos = -0.75f;
     float yPos = 0;
-    float scale = 1.0f;
+    float scale = 1.5f;
     float iterations = 100.0f;
 
     while (win.isRunning()) {
