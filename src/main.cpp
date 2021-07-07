@@ -3,7 +3,7 @@
 #include "Window.h"
 
 int main(int argc, char *argv[]) {
-    Window win(400, 400);
+    Window win(800, 800);
 
     Shader s("shaders/vert.glsl", "shaders/frag.glsl");
 
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         s.setUniform1f("iterations", iterations);
         quad.render();
 
-        win.update();
+        win.update(&multibrotExponent, &iterations);
         win.processEvents(xPos, yPos, scale);
     }
 

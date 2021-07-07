@@ -13,7 +13,7 @@ class Window {
 
     void clear();
 
-    void update();
+    void update(float *exp, float *iter);
     void processEvents(float &xPos, float &yPos, float &scale);
 
   protected:

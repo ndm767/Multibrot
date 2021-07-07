@@ -1,4 +1,7 @@
 #include "Window.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_opengl3.h"
+#include "imgui/imgui_impl_sdl.h"
 
 Window::Window(int w, int h) {
     running = true;
@@ -18,9 +21,23 @@ Window::Window(int w, int h) {
 
     glewExperimental = true;
     glewInit();
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO &io = ImGui::GetIO();
+    (void)io;
+
+    ImGui::StyleColorsLight();
+
+    ImGui_ImplSDL2_InitForOpenGL(rWindow, rContext);
+    ImGui_ImplOpenGL3_Init();
 }
 
 Window::~Window() {
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
+
     SDL_GL_DeleteContext(rContext);
     SDL_DestroyWindow(rWindow);
     SDL_Quit();
@@ -31,11 +48,27 @@ void Window::clear() {
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Window::update() { SDL_GL_SwapWindow(rWindow); }
+void Window::update(float *exp, float *iter) {
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplSDL2_NewFrame(rWindow);
+    ImGui::NewFrame();
+
+    ImGui::Begin("Multibrot");
+
+    ImGui::InputFloat("Exponent", exp);
+    ImGui::InputFloat("Iterations", iter);
+
+    ImGui::End();
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    SDL_GL_SwapWindow(rWindow);
+}
 
 void Window::processEvents(float &xPos, float &yPos, float &scale) {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
+        ImGui_ImplSDL2_ProcessEvent(&e);
         if (e.type == SDL_QUIT) {
             running = false;
         } else if (e.type == SDL_KEYDOWN) {

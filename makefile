@@ -1,6 +1,7 @@
 PNAME := multibrot
 
 PCXXSRC := $(wildcard src/*.cpp)
+PCXXSRC += $(wildcard src/imgui/*.cpp)
 
 POBJS = $(PCXXSRC:.cpp=.o)
 
