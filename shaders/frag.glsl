@@ -11,22 +11,14 @@ uniform vec2 userPos;
 
 const float MAX_ITER = 1000000.0;
 
-vec2 compMult(vec2 a, vec2 b) {
-    vec2 ret = vec2(0, 0);
-    ret.x = a.x * b.x - a.y * b.y;
-    ret.y = a.x * b.y + a.y * b.x;
-    return ret;
-}
-
 vec2 compExp(vec2 z, float power) {
-    if (power <= 0) {
-        return vec2(0, 0);
-    }
 
-    vec2 ret = z;
-    for (float i = 1; i < power; i++) {
-        ret = compMult(ret, z);
-    }
+    vec2 ret = vec2(0, 0);
+
+    ret.x =
+        pow((z.x * z.x + z.y * z.y), power / 2.0) * cos(power * atan(z.y, z.x));
+    ret.y =
+        pow((z.x * z.x + z.y * z.y), power / 2.0) * sin(power * atan(z.y, z.x));
 
     return ret;
 }
