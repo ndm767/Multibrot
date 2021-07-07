@@ -14,7 +14,7 @@ class Window {
     void clear();
 
     void update();
-    void processEvents();
+    void processEvents(float &xPos, float &yPos, float &scale);
 
   protected:
     bool running;

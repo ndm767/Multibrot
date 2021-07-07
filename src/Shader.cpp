@@ -67,3 +67,8 @@ void Shader::setUniform1f(std::string uniName, float val) {
     GLuint loc = glGetUniformLocation(shaderProgram, uniName.c_str());
     glUniform1f(loc, val);
 }
+
+void Shader::setUniformVec2f(std::string uniName, float val1, float val2) {
+    GLuint loc = glGetUniformLocation(shaderProgram, uniName.c_str());
+    glUniform2f(loc, val1, val2);
+}

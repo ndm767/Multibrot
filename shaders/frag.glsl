@@ -4,7 +4,12 @@ in vec3 fPos;
 
 out vec4 outColor;
 
-const float MAX_ITER = 100.0;
+uniform float multiExp;
+uniform float scale;
+uniform float iterations;
+uniform vec2 userPos;
+
+const float MAX_ITER = 1000000.0;
 
 vec2 compMult(vec2 a, vec2 b) {
     vec2 ret = vec2(0, 0);
@@ -43,7 +48,8 @@ float multibrot(vec2 c, float power, float iter) {
 }
 
 void main() {
-    vec2 compPos = vec2(fPos.xy);
-    float val = multibrot(compPos, 3.0, 10.0);
+    vec2 compPos = vec2(fPos.xy * scale);
+    compPos += userPos;
+    float val = multibrot(compPos, multiExp, iterations);
     outColor = vec4(val, val, val, 1.0);
 }

@@ -33,14 +33,35 @@ void Window::clear() {
 
 void Window::update() { SDL_GL_SwapWindow(rWindow); }
 
-void Window::processEvents() {
+void Window::processEvents(float &xPos, float &yPos, float &scale) {
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT) {
             running = false;
         } else if (e.type == SDL_KEYDOWN) {
-            if (e.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
+            switch (e.key.keysym.scancode) {
+            case SDL_SCANCODE_ESCAPE:
                 running = false;
+                break;
+            case SDL_SCANCODE_W:
+                yPos += scale / 2.0f;
+                break;
+            case SDL_SCANCODE_S:
+                yPos -= scale / 2.0f;
+                break;
+            case SDL_SCANCODE_A:
+                xPos -= scale / 2.0f;
+                break;
+            case SDL_SCANCODE_D:
+                xPos += scale / 2.0f;
+                break;
+            case SDL_SCANCODE_Q:
+                scale *= 1.1f;
+                break;
+            case SDL_SCANCODE_E:
+                scale /= 1.1f;
+            default:
+                break;
             }
         }
     }
